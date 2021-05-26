@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -48,7 +49,8 @@ class PostController extends Controller
       $post = new Post();
       $post->fill($data);
 
-      $post->slug = 'Esempio';
+      $post->slug = $this->generateSlug($post->title); //quando esce dal ciclo perché non c'è più $post_with_slug
+
       $post->save();
 
       return redirect()->route('admin.posts.index');
@@ -97,5 +99,22 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    private function generateSlug(string $title)
+    {
+      $slug = Str::slug($title, '-'); //salvo lo slug che vorrei generare
+      $slug_base = $slug; //ne salvo una copia in slug_base
+      $contatore = 1;
+
+      $post_with_slug = Post::where('slug', '=', $slug)->first(); //verifico se esiste già un post con questo slug prendendo il primo risultato
+      while ($post_with_slug) {
+        $slug = $slug_base . '-' . $contatore;
+        $contatore++;
+
+        $post_with_slug = Post::where('slug', '=', $slug)->first(); //aggiorna il valore di $post_with_slug
+      }
+
+      return $slug;
     }
 }
