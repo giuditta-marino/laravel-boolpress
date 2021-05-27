@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('index');
+// Route::get('/blog', function(){
+//   $posts = Post::all();
+//   return view('guests.blog', compact('posts'));
+// });
+Route::get('/blog', 'PostController@index')->name('blog');
+Route::get('/show/{slug}', 'PostController@show')->name('post');
 
 //tutte le rotte che raggruppo sono soggette al middleware di autenticazione, sono le rotte il cui controller sta sotto il namespace Admin(nome della cartella in cui è contenuto il controller, tutte avranno prefisso 'admin' e come nome condiviso 'admin.' e dentro ci inseriamo la route che va alla dashboard perché punta a HomeController@index nella cartella Admin. Questa route è raggiungibile aggiungendo a localhost:8000/admin/ perché oltre allo slash che indichiamo come parametro della funzione get abbiamo prima il prefix 'admin'
 Route::prefix('admin')

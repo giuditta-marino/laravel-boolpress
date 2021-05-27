@@ -2,9 +2,8 @@
 
 @section('content')
 <div class="container">
-  <div class="row">    
+  <div class="row">
     <div class="col-md-12">
-      <a href="{{route('admin.posts.create')}}">Scrivi un nuovo post</a>
     </div>
   </div>
     <div class="row justify-content-center">
@@ -17,12 +16,12 @@
                   {{ $post->content }}
                 </div>
                 <div class="text-center">
-                  <a href="{{route('admin.posts.edit', ['post' => $post->id])}}">Modifica post</a>
                 </div>
             </div>
+            <a href="{{route('post', ['post => $post->slug'])}}">Apri post</a>
         </div>
 
 @endforeach
-</div>
+  </div>
 </div>
 @endsection
