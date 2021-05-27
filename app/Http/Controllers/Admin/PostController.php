@@ -6,6 +6,7 @@ use App\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -28,7 +29,8 @@ class PostController extends Controller
      */
     public function create()
     {
-      return view('admin.posts.create');
+      $categories = Category::all();
+      return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -41,7 +43,8 @@ class PostController extends Controller
     {
       $request->validate([
         'title' => 'required|string|max:255',
-        'content' => 'required|string'
+        'content' => 'required|string',
+        'category_id' => 'exists:categories,id|nullable'
       ]);
 
       $data = $request->all();
@@ -75,7 +78,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-      return view('admin.posts.edit', compact('post'));
+      $categories = Category::all();
+      return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -95,7 +99,7 @@ class PostController extends Controller
       $data = $request->all();
       //se il title che ha post è diverso da quello che sta inserendo l'utente allora fai generateSlug in modo tale che cambi lo slug solo se modifico il titolo
 
-      $data['slug'] = $this->generateSlug($data['title'], $post->title != $data['title']);  
+      $data['slug'] = $this->generateSlug($data['title'], $post->title != $data['title']);
 
       $post->update($data);
 

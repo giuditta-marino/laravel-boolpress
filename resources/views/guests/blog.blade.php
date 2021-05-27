@@ -18,7 +18,7 @@
                 <div class="text-center">
                 </div>
             </div>
-            <a href="{{route('post', ['post => $post->slug'])}}">Apri post</a>
+            <a href="{{route('post', ['slug' => $post->slug])}}">Apri post</a>
         </div>
 
 @endforeach
