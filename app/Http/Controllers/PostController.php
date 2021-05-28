@@ -10,13 +10,13 @@ class PostController extends Controller
   {
     $posts = Post::all();
 
-    return view('guests.blog', compact('posts'));
+    return view('guests.posts.blog', compact('posts'));
   }
 
   public function show($slug)
   {
     $post = Post::where('slug', $slug)->first();
 
-    return view('guests.show', compact('post'));
+    return view('guests.posts.show', compact('post'));
   }
 }

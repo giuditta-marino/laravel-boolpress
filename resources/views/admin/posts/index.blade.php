@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-  <div class="row">    
+  <div class="row">
     <div class="col-md-12">
       <a href="{{route('admin.posts.create')}}">Scrivi un nuovo post</a>
     </div>
@@ -17,7 +17,12 @@
                   {{ $post->content }}
                 </div>
                 <div class="text-center">
-                  <a href="{{route('admin.posts.edit', ['post' => $post->id])}}">Modifica post</a>
+                  <div class="edit">
+                    <a href="{{route('admin.posts.edit', ['post' => $post->id])}}">Modifica post</a>
+                  </div>
+                  <div class="read">
+                    <a href="{{route('admin.posts.show', ['post' => $post->id])}}">Apri post</a>
+                  </div>
                 </div>
             </div>
         </div>

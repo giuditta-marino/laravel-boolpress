@@ -30,7 +30,8 @@
             <select class="form-control @error('category') is-invalid @enderror" id="category"          name="category_id">
               <option value="">Select</option>
               @foreach ($categories as $category)
-              <option {{ $category->id == old('category_id', $post->category_id ? 'selected' : '') }} value="{{ $category->id }}">{{ $category->name }}</option>                             @endforeach
+              <option value="{{ $category->id }}" {{$category->id == old('category_id', $post->category_id) ? 'selected' : '' }}>{{ $category->name }}</option>
+              @endforeach
             </select>
             @error('category')
             <small class="text-danger">{{ $message }}</small>
