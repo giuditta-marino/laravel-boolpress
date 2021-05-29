@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Categoria: {{$category->name}} </h1>
+  @if($post->category)
+  <h1>Categoria: {{$category->name}} </h1>
+  @endif
 @endsection

@@ -15,7 +15,7 @@ class UpdatePostsTable extends Migration
     {
       Schema::table('posts', function (Blueprint $table) {
         $table->unsignedBigInteger('category_id')->after('slug')->nullable();
-        $table->foreign('category_id')->references('id')->on('categories');
+        $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
       });
     }
 
