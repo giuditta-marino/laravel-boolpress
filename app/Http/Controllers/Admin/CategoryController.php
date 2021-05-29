@@ -41,7 +41,7 @@ class CategoryController extends Controller
     {
       $request->validate([
         'name' => 'required|string|max:255',
-
+      ]);
         $data = $request->all();
 
         $data['slug'] = $this->generateSlug($data['name']);
@@ -50,7 +50,7 @@ class CategoryController extends Controller
         $category->create($data);
 
         return redirect()->route('admin.categories.index');
-      ]);
+
     }
 
     /**
@@ -61,7 +61,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-
+      return view('admin.categories.show', compact('category'));
     }
 
     /**
@@ -86,16 +86,15 @@ class CategoryController extends Controller
     {
       $request->validate([
         'name' => 'required|string|max:255',
-
+      ]);
         $data = $request->all();
 
         $data['slug'] = $this->generateSlug($data['name'], $data['name'] != $category->name, $category->slug);
 
-        $category = new Category();
+        // $category = new Category();
         $category->update($data);
 
-        return redirect()->route('admin.categories.index');
-      ]);
+        return redirect()->route('admin.categories.index');      
     }
 
     /**
@@ -104,9 +103,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+      $category->delete();
+
+      return redirect()->route('admin.categories.index');
     }
 
     private function generateSlug(string $title, bool $change = true, string $old_slug = '')

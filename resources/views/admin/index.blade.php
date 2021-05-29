@@ -7,7 +7,7 @@
         <div><a href="#">Dashboard</a></div>
         <div><a href="#">Posts</a></div>
         <div><a href="#">Users</a></div>
-        <div><a href="#">Categories</a></div>
+        <div><a href="{{route('admin.categories.index')}}">Categories</a></div>
         <div><a href="#">Tags</a></div>
       </div>
     </div>
