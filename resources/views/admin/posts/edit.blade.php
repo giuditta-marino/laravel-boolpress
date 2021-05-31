@@ -22,7 +22,7 @@
   @endif -->
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <form class="" action="{{route('admin.posts.update', ['post' => $post->id])}}" method="post">
+      <form class="" action="{{route('admin.posts.update', ['post' => $post->id])}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="form-group">
@@ -53,6 +53,19 @@
           <small class="text-danger">{{ $message }}</small>
           @enderror
         </div>
+
+        @if($post->cover)
+        <img src="{{ asset('storage/' . $post->cover) }}" alt="{{ $post->title }}">
+        @endif
+
+        <div class="form-group">
+          Modifica immagine di copertina:
+          <input type="file" class="form-control-file @error('content') is-invalid @enderror" id="cover" name="cover">
+          @error('cover')
+          <small class="text-danger">{{ $message }}</small>
+          @enderror
+        </div>
+
 
         <button type="submit" class="btn btn-primary" name="button">Salva</button>
 

@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Category;
+use Illuminate\Support\Facades\Storage;
+use App\Mail\SendNewMail;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -45,15 +48,22 @@ class PostController extends Controller
         'title' => 'required|string|max:255',
         'content' => 'required|string',
         'category_id' => 'exists:categories,id|nullable',
-        'cover' => 'image|max:100|nullable'
+        'cover' => 'mimes:jpg,bmp,png|max:8000|nullable'
       ]);
 
       $data = $request->all();
-      $cover = Storage::put('uploads', $data['cover']);
+
       $post = new Post();
       $post->fill($data);
 
       $post->slug = $this->generateSlug($post->title); //quando esce dal ciclo perché non c'è più $post_with_slug
+
+      if (array_key_exists('cover', $data)) {
+        $cover = Storage::put('uploads', $data['cover']);
+        $post->cover = $cover;
+      }
+
+      Mail::to('mail@mail.it')->send(new SendNewMail());
 
       $post->save();
 
@@ -93,14 +103,21 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
       $request->validate([
+        'category_id' => 'exists:categories,id|nullable',
         'title' => 'required|string|max:255',
-        'content' => 'required|string'
+        'content' => 'required|string',
+        'cover' => 'mimes:jpg,bmp,png|max:8000|nullable'
       ]);
 
       $data = $request->all();
       //se il title che ha post è diverso da quello che sta inserendo l'utente allora fai generateSlug in modo tale che cambi lo slug solo se modifico il titolo
 
       $data['slug'] = $this->generateSlug($data['title'], $post->title != $data['title']);
+
+      if (array_key_exists('cover', $data)) {
+        $cover = Storage::put('uploads', $data['cover']);
+        $data['cover'] = $cover;
+      }
 
       $post->update($data);
 

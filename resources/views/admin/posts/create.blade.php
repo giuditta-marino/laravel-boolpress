@@ -55,8 +55,8 @@
         </div>
 
         <div class="form-group">
-          <label for="cover">Cover</label>
-          <input type="file" class="form-control-file @error('content') is-invalid @enderror" id="cover" name="cover">{{ old('cover') }}
+          Inserisci un'immagine di copertina:
+          <input type="file" class="form-control-file @error('content') is-invalid @enderror" id="cover" name="cover">
           @error('cover')
           <small class="text-danger">{{ $message }}</small>
           @enderror
