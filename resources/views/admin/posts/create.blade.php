@@ -31,7 +31,7 @@
             <select class="form-control @error('category') is-invalid @enderror" id="category"          name="category_id">
               <option value="">Select</option>
               @foreach ($categories as $category)
-              <option value="{{ $category->id }}">{{ $category->name }}</option>                             @endforeach
+              <option value="{{ $category->id }}">{{ $category->name }}</option>                       @endforeach
             </select>
             @error('category')
             <small class="text-danger">{{ $message }}</small>
@@ -60,6 +60,20 @@
           @error('cover')
           <small class="text-danger">{{ $message }}</small>
           @enderror
+        </div>
+
+        <div class="form-group">
+          <label for="tag">Tag</label>
+            <select class="form-control @error('tag-ids') is-invalid @enderror" id="tag"      name="tag_ids[]" multiple>
+
+              @foreach ($tags as $tag)
+              <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+              @endforeach
+
+            </select>
+            @error('tag-ids')
+            <small class="text-danger">{{ $message }}</small>
+            @enderror
         </div>
 
         <button type="submit" class="btn btn-primary" name="button">Salva</button>

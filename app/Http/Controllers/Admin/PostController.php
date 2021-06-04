@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Category;
+use App\Tag;
 use Illuminate\Support\Facades\Storage;
 use App\Mail\SendNewMail;
 use Illuminate\Support\Facades\Mail;
@@ -33,7 +34,8 @@ class PostController extends Controller
     public function create()
     {
       $categories = Category::all();
-      return view('admin.posts.create', compact('categories'));
+      $tags = Tag::all();
+      return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -48,8 +50,10 @@ class PostController extends Controller
         'title' => 'required|string|max:255',
         'content' => 'required|string',
         'category_id' => 'exists:categories,id|nullable',
-        'cover' => 'mimes:jpg,bmp,png|max:8000|nullable'
+        'cover' => 'mimes:jpg,bmp,png|max:8000|nullable',
+        'tag_ids.*' => 'exists:tags,id'
       ]);
+
 
       $data = $request->all();
 
@@ -66,6 +70,10 @@ class PostController extends Controller
       Mail::to('mail@mail.it')->send(new SendNewMail());
 
       $post->save();
+
+      if (array_key_exists('tag_ids', $data)) {
+        $post->tags()->attach($data['tag_ids']);
+      }
 
       return redirect()->route('admin.posts.index');
     }

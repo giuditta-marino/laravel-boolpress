@@ -50,7 +50,6 @@ class CategoryController extends Controller
         $category->create($data);
 
         return redirect()->route('admin.categories.index');
-
     }
 
     /**
@@ -94,7 +93,7 @@ class CategoryController extends Controller
         // $category = new Category();
         $category->update($data);
 
-        return redirect()->route('admin.categories.index');      
+        return redirect()->route('admin.categories.index');
     }
 
     /**

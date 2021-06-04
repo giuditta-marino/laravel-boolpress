@@ -15,11 +15,10 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <a href="{{route('admin.tags.create')}}">Aggiungi una categoria</a>
+      <a href="{{route('admin.tags.create')}}">Aggiungi un tag</a>
     </div>
   </div>
     <div class="row justify-content-center">
-      ciao
       @foreach($tags as $tag)
         <div class="col-md-3">
             <div class="card">
@@ -29,10 +28,10 @@
                 </div>
                 <div class="text-center">
                   <div class="edit">
-                    <a href="{{route('admin.tags.edit', ['tag' => $tag->id])}}">Modifica categoria</a>
+                    <a href="{{route('admin.tags.edit', ['tag' => $tag->id])}}">Modifica tag</a>
                   </div>
                   <div class="read">
-                    <a href="{{route('admin.tags.show', ['tag' => $tag->id])}}">Mostra categoria</a>
+                    <a href="{{route('admin.tags.show', ['tag' => $tag->id])}}">Mostra tag</a>
                   </div>
                   <div class="delete">
                     <a class="btn btn-danger" onclick="event.preventDefault();this.nextElementSibling.submit()"> Delete</a>

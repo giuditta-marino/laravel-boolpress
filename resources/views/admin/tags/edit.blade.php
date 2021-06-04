@@ -9,13 +9,13 @@
 
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <form class="" action="{{route('admin.categories.update', ['category' => $category->id])}}" method="post">
+      <form class="" action="{{route('admin.tags.update', ['tag' => $tag->id])}}" method="post">
         @csrf
         @method('PATCH')
 
         <div class="form-group">
-          <label for="name">Nome categoria</label>
-          <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" value="{{ old('name', $category->name) }}">
+          <label for="name">Nome tag</label>
+          <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" value="{{ old('name', $tag->name) }}">
           @error('name')
           <small class="text-danger">{{ $message }}</small>
           @enderror
