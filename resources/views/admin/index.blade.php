@@ -9,7 +9,7 @@
         <div><a href="{{ route('admin.posts.index') }}">Posts</a></div>
         <div><a href="#">Users</a></div>
         <div><a href="{{ route('admin.categories.index') }}">Categories</a></div>
-        <div><a href="#">Tags</a></div>      
+        <div><a href="{{ route('admin.tags.index') }}">Tags</a></div>      
       </div>
     </div>
     <div class="row justify-content-center">

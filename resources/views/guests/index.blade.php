@@ -88,7 +88,7 @@
                     <a href="{{route('blog')}}">Blog</a>
                 </div>
                 <div class="links">
-                  <a href="{{ route('contact') }}">Contattaci</a>
+                  <a href="{{ route('contactus') }}">Contattaci</a>
                 </div>
             </div>
         </div>
