@@ -21,6 +21,9 @@ Route::get('/', 'HomeController@index')->name('index');
 //   $posts = Post::all();
 //   return view('guests.blog', compact('posts'));
 // });
+Route::get('/contact', function(){
+  return view('guests.contact');
+})->name('contact');
 Route::get('/blog', 'PostController@index')->name('blog');
 Route::get('/show/{slug}', 'PostController@show')->name('post');
 Route::get('/categories/{slug}', 'CategoryController@index')->name('category.index');

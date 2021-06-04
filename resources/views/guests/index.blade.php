@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Boolpress</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -81,11 +81,14 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Pagina Home per guests
+                    Benvenuti in Boolpress
                 </div>
 
                 <div class="links">
                     <a href="{{route('blog')}}">Blog</a>
+                </div>
+                <div class="links">
+                  <a href="{{ route('contact') }}">Contattaci</a>
                 </div>
             </div>
         </div>
