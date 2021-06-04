@@ -24,9 +24,9 @@
       </div>
 
       <div class="form-group">
-        <label for="subject">Oggetto</label>
-        <input class="form-control @error('subject') is-invalid @enderror" id="subject" type="text" name="subject" value="{{ old('email') }}">
-        @error('subject')
+        <label for="reason">Oggetto</label>
+        <input class="form-control @error('reason') is-invalid @enderror" id="reason" type="text" name="reason" value="{{ old('email') }}">
+        @error('reason')
         <small class="text-danger">{{ $message }}</small>
         @enderror
       </div>

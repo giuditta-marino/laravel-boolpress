@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -11,6 +12,10 @@ class ContactController extends Controller
   {
     $data = $request->all();
 
-    Mail::to('servizioclienti@boolpress.it')->send(new ContactMail());
+
+    Mail::to('servizioclienti@boolpress.it')
+    ->send(new ContactMail($data['name'], $data['email'], $data['reason'], $data['content']));
+
+    return redirect()->route('index');
   }
 }
