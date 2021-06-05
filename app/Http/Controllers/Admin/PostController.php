@@ -54,7 +54,6 @@ class PostController extends Controller
         'tag_ids.*' => 'exists:tags,id'
       ]);
 
-
       $data = $request->all();
 
       $post = new Post();
@@ -98,7 +97,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
       $categories = Category::all();
-      return view('admin.posts.edit', compact('post', 'categories'));
+      $tags = Tag::all();
+
+      return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -114,7 +115,8 @@ class PostController extends Controller
         'category_id' => 'exists:categories,id|nullable',
         'title' => 'required|string|max:255',
         'content' => 'required|string',
-        'cover' => 'mimes:jpg,bmp,png|max:8000|nullable'
+        'cover' => 'mimes:jpg,bmp,png|max:8000|nullable',
+        'tag_ids.*' => 'exists:tags,id'
       ]);
 
       $data = $request->all();
@@ -129,6 +131,12 @@ class PostController extends Controller
 
       $post->update($data);
 
+      if (array_key_exists('tag_ids', $data)) {
+        $post->tags()->sync($data['tag_ids']);
+      } else {
+        $post->tags()->detach();
+      }
+
       return redirect()->route('admin.posts.index');
     }
 
@@ -140,7 +148,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+      $post->delete();
+
+      return redirect()->route('admin.posts.index');
     }
 
     private function generateSlug(string $title, bool $change = true)

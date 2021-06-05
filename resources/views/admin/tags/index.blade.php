@@ -7,9 +7,8 @@
       <div><a href="{{ route('index') }}">Pagina di benvenuto</a></div>
       <div><a href="{{ route('admin.index') }}">Dashboard</a></div>
       <div><a href="{{ route('admin.posts.index') }}">Posts</a></div>
-      <div><a href="#">Users</a></div>
-      <div><a href="{{ route('admin.tags.index') }}">tags</a></div>
-      <div><a href="#">Tags</a></div>
+      <div><a href="#">Users</a></div>      
+      <div><a href="{{ route('admin.tags.index') }}">Tags</a></div>
       <div><a href="#">Contattaci</a></div>
     </div>
   </div>

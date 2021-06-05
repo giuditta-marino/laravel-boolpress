@@ -4,7 +4,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h3>Nuovo post</h3>
+      <h3>Modifica</h3>
     </div>
   </div>
   <!-- @if ($errors->any())
@@ -66,6 +66,20 @@
           @enderror
         </div>
 
+        <div class="form-group">
+          <label for="tag">Tag</label>
+
+            <select class="form-control @error('tag-ids') is-invalid @enderror" id="tag"      name="tag_ids[]" multiple>
+
+              @foreach ($tags as $tag)
+              <option value="{{ $tag->id }}" {{ $post->tags->contains($tag) ? 'selected' : '' }}>{{ $tag->name }}</option>
+              @endforeach
+
+            </select>
+            @error('tag-ids')
+            <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
 
         <button type="submit" class="btn btn-primary" name="button">Salva</button>
 
