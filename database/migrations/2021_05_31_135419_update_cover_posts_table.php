@@ -25,6 +25,6 @@ class UpdateCoverPostsTable extends Migration
      */
     public function down()
     {
-      $table->dropColumn('cover');
+      Schema::dropIfExists('cover');
     }
 }
